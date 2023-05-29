@@ -8,10 +8,12 @@ class TwitchEmote extends Emote {
      * @param {Channel} channel - Channel this emote belongs to.
      * @param {string} id - ID of the emote.
      * @param {data} data - The raw emote data.
+     * @param {string} custom_url - Custom URL for the emote.
      */
-    constructor(channel, id, data) {
+    constructor(channel, id, data, custom_url = null) {
         super(channel, id, data);
         this.type = 'twitch';
+        this.custom_url = custom_url;
     }
 
     /**
@@ -51,7 +53,7 @@ class TwitchEmote extends Emote {
      * @returns {string}
      */
     toLink(size = 0) {
-        return Constants.Twitch.CDN(this.id, size); // eslint-disable-line new-cap
+        return this.custom_url || Constants.Twitch.CDN(this.id, size); // eslint-disable-line new-cap
     }
 
     /**
@@ -80,7 +82,8 @@ class TwitchEmote extends Emote {
                 animated: emoteJSON.animated,
                 emoticon_set: emoteJSON.set,
                 formats: emoteJSON.animated ? { animated: emoteJSON.animated } : {}
-            });
+            },
+            emoteJSON.custom_url);
     }
 }
 

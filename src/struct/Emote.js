@@ -38,6 +38,12 @@ class Emote {
          */
         this.type = null;
 
+        /**
+         * Custom URL for the emote. Should point to an image.
+         * @type {string}
+         */
+        this.custom_url = null;
+
         this._setup(data);
     }
 
@@ -71,7 +77,8 @@ class Emote {
         return {
             code: this.code,
             id: this.id,
-            channel_id: this.channel.channel_id
+            channel_id: this.channel.channel_id,
+            custom_url: this.custom_url
         };
     }
 }

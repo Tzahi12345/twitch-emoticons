@@ -8,10 +8,12 @@ class FFZEmote extends Emote {
      * @param {Channel} channel - Channel this emote belongs to.
      * @param {string} id - ID of the emote.
      * @param {data} data - The raw emote data.
+     * @param {string} custom_url - Custom URL for the emote.
      */
-    constructor(channel, id, data) {
+    constructor(channel, id, data, custom_url = null) {
         super(channel, id, data);
         this.type = 'ffz';
+        this.custom_url = custom_url;
     }
 
     /**
@@ -67,7 +69,7 @@ class FFZEmote extends Emote {
     toLink(size = 0) {
         size = this.sizes[size];
         if (this.animated) return Constants.FFZ.CDNAnimated(this.id, size); // eslint-disable-line new-cap
-        return Constants.FFZ.CDN(this.id, size); // eslint-disable-line new-cap
+        return this.custom_url || Constants.FFZ.CDN(this.id, size); // eslint-disable-line new-cap
     }
 
     /**
@@ -103,7 +105,8 @@ class FFZEmote extends Emote {
                 owner: { name: emoteJSON.ownerName },
                 modifier: emoteJSON.modifier,
                 modifier_flags: emoteJSON.modifier
-            });
+            },
+            emoteJSON.custom_url);
     }
 }
 

@@ -8,10 +8,12 @@ class SevenTVEmote extends Emote {
      * @param {Channel} channel - Channel this emote belongs to.
      * @param {string} id - ID of the emote.
      * @param {data} data - The raw emote data.
+     * @param {string} custom_url - Custom URL for the emote.
      */
-    constructor(channel, id, data) {
+    constructor(channel, id, data, custom_url = null) {
         super(channel, id, data);
         this.type = '7tv';
+        this.custom_url = custom_url;
     }
 
     /**
@@ -62,7 +64,7 @@ class SevenTVEmote extends Emote {
      */
     toLink(size = 0) {
         size = this.sizes[size];
-        return Constants.SevenTV.CDN(this.id, size); // eslint-disable-line new-cap
+        return this.custom_url || Constants.SevenTV.CDN(this.id, size); // eslint-disable-line new-cap
     }
 
     /**
@@ -98,7 +100,8 @@ class SevenTVEmote extends Emote {
                 host: {
                     files: sizes
                 }
-            });
+            },
+            emoteJSON.custom_url);
     }
 }
 
