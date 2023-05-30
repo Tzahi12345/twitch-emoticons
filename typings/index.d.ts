@@ -1,4 +1,4 @@
-declare module '@mkody/twitch-emoticons' {
+declare module '@tzahi12345/twitch-emoticons' {
     export class Channel {
         public constructor(fetcher: EmoteFetcher, id: number);
 
