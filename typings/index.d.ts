@@ -103,7 +103,8 @@ declare module '@tzahi12345/twitch-emoticons' {
         animated?: boolean,
         ownerName?: string,
         sizes?: string[],
-        set?: string
+        set?: string,
+        imageType?: string
     }
 
     export class Collection<K, V> extends Map<K, V> {
