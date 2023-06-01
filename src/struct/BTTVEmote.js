@@ -59,12 +59,12 @@ class BTTVEmote extends Emote {
     }
 
     /**
-     * Override for `toJSON`.
-     * Will result in a JSON representation of a BTTVEmote
+     * Override for `toObject`.
+     * Will result in an Object representation of a BTTVEmote
      * @returns {Object}
      */
-    toJSON() {
-        return Object.assign({}, super.toJSON(), {
+    toObject() {
+        return Object.assign({}, super.toObject(), {
             animated: this.animated,
             ownerName: this.ownerName,
             type: this.type
@@ -72,21 +72,21 @@ class BTTVEmote extends Emote {
     }
 
     /**
-     * Converts a JSON into a BTTVEmote
-     * @param {JSON} [emoteJSON] - JSON representation of this emote
+     * Converts an emote Object into a BTTVEmote
+     * @param {Object} [emoteObject] - Object representation of this emote
      * @param {Channel} [channel=null] - Channel this emote belongs to.
      * @returns {BTTVEmote}
      */
-    static fromJSON(emoteJSON, channel = null) {
-        return new BTTVEmote(channel, emoteJSON.id,
+    static fromObject(emoteObject, channel = null) {
+        return new BTTVEmote(channel, emoteObject.id,
             {
-                code: emoteJSON.code,
-                animated: emoteJSON.animated,
+                code: emoteObject.code,
+                animated: emoteObject.animated,
                 user: {
-                    name: emoteJSON.ownerName
+                    name: emoteObject.ownerName
                 }
             },
-            emoteJSON.custom_url);
+            emoteObject.custom_url);
     }
 }
 
